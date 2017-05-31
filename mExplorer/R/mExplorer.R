@@ -159,3 +159,22 @@ prepare_dframe = function(dframe) {
 	}
 	dframe
 }
+
+
+#' Example vector of yeast transcription factors for m:Explorer
+#'
+#' @docType data
+#' @keywords datasets
+#' @name yeastCCgenes
+#' @usage data(yeastCCgenes)
+#' @format A named character vector with 186 elements
+NULL
+
+#' Example predictor data for m:Explorer
+#'
+#' @docType data
+#' @keywords datasets
+#' @name yeastTFdata
+#' @usage data(yeastTFdata)
+#' @format A data frame with 6253 observations of 18 variables
+NULL
