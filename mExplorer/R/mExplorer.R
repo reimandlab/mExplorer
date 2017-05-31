@@ -40,26 +40,26 @@ mExplorer = function(
 	# collection of submodels prepared
 	submodels = colnames(dframe)
 	if (interactions) {
-		submodels = c(submodels, combn(submodels, 2, paste, collapse=":"))
+		submodels = c(submodels, utils::combn(submodels, 2, paste, collapse=":"))
 	}
 	
 	# fit null model
 	fit0 = nnet::multinom(response~1, data=dframe, maxit=5000, trace=0)
-	ll_fit0 = logLik(fit0)
+	ll_fit0 = stats::logLik(fit0)
 	df_fit0 = fit0$edf
 	
 	# fit alternative models and test against null model
 	regressed = parallel::mclapply(1:length(submodels), 
-		mExplorer:::run_regression, 
+			run_regression,
 			submodels, dframe, response, ll_fit0, df_fit0, all_pred_levels, all_resp_levels,
-		mc.cores=n_cores)
+			mc.cores=n_cores)
 	pval_list = sapply(regressed, '[[', 'chi_p')
 	resp_coef_list = do.call("rbind", lapply(regressed, '[[', 'resp_coefs'))
 	pred_coef_list = do.call("rbind", lapply(regressed, '[[', 'pred_coefs'))
 	names(pval_list) = rownames(resp_coef_list) = rownames(pred_coef_list) = submodels
 	
 	# collect pvalues from regression into scores
-	scores = p.adjust(unlist(pval_list), method=multitest)
+	scores = stats::p.adjust(unlist(pval_list), method=multitest)
 	scores = sort(scores[scores<=significance])
 	resp_coef_list = resp_coef_list[names(scores),,drop=F]
 	pred_coef_list = pred_coef_list[names(scores),,drop=F]
@@ -71,11 +71,11 @@ mExplorer = function(
 # pkey=229 
 # pkey = 81 # one level in predictor
 run_regression = function(pkey, submodels, dframe, response, ll_fit0, df_fit0, all_pred_levels, all_resp_levels) {
-	my_formula = as.formula(paste("response ~", submodels[pkey]))
+	my_formula = stats::as.formula(paste("response ~", submodels[pkey]))
 	fit1 = nnet::multinom(my_formula, data=dframe, maxit=5000, trace=0)
 	
-	ci = tryCatch(confint(fit1), error=function(x) NULL)
-	co = coef(fit1)
+	ci = tryCatch(stats::confint(fit1), error=function(x) NULL)
+	co = stats::coef(fit1)
 	ci_sign = resp_specificity = pred_specificity = NULL
 	if (length(all_resp_levels)==1) {
 		resp_specificity = structure(1, names=all_resp_levels)
@@ -110,7 +110,7 @@ run_regression = function(pkey, submodels, dframe, response, ll_fit0, df_fit0, a
 	pred_specificity = pred_specificity[all_pred_levels]
 	# NB! 2x log likelihood equivalent to anova
 	# NB! log.p=T option returns natural logarithm of P, converting to log10
-	pp = (pchisq(2*(logLik(fit1)-ll_fit0), fit1$edf-df_fit0, lower.tail=F))[1]
+	pp = (stats::pchisq(2*(stats::logLik(fit1)-ll_fit0), fit1$edf-df_fit0, lower.tail=F))[1]
 	pp = ifelse(any(sign(co)>0), pp, 1)
 	cat(pkey, " ")
 		
