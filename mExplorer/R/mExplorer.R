@@ -8,12 +8,12 @@
 #' @param multitest Method to perform multiple testing correction for p-values from predictor evaluation. See p.adjust() for details.
 
 #' @return Vector of scores, with names corresponding to predictors.
-#' @references  TBA
-#' @author  Juri Reimand <juri.reimand@@utoronto.ca>
+#' @references m:Explorer - multinomial regression models reveal positive and negative regulators of longevity in yeast quiescence (2012, Genome Biology) by Juri Reimand, Anu Aun, Jaak Vilo, Juan M. Vaquerizas, Juhan Sedman, and Nicholas M. Luscombe
+#' @author Juri Reimand <juri.reimand@@utoronto.ca>
 #' @examples
-#'  data(yeastCCgenes)
-#' 	data(yeastTFdata)
-#'  mExplorer(yeastTFdata, yeastCCgenes)
+#' data(yeastCCgenes)
+#' data(yeastTFdata)
+#' mExplorer(yeastTFdata, yeastCCgenes)
 #' @export
 
 mExplorer = function(
