@@ -160,6 +160,36 @@ prepare_dframe = function(dframe) {
 	dframe
 }
 
+#' Creation of m:Explorer input data frame from GMT files
+#' 
+#' @param gmt_filename Path to GMT file to convert.
+#' @param min_genes Numeric indicating to discard pathways with less than min_genes genes. If NA, there is no lower bound on the number of genes. Default is NA.
+#' @param max_genes Numeric indicating to discard pathways with more than max_genes genes. If NA, there is no upper bound on the number of genes. Default is NA.
+
+#' @return Data frame with pathways as columns, genes as rows. Gene/pathway combinations are marked with "+" if that gene is in the pathway, or "." if not.
+#' @examples
+#' # Create m:Explorer input data frame from GMT at "path/to/gmt," discarding pathways with less than 5 genes and more than 1000 genes
+#' \dontrun{gmt2dframe("path/to/gmt", 5, 1000)}
+#' @export
+gmt2dframe = function(gmt_filename, min_genes = NA, max_genes = NA) {
+	gmt = qusage::read.gmt(gmt_filename)
+	lengths = sapply(gmt, length)
+	if (is.na(min_genes)) min_genes = min(lengths)
+	if (is.na(max_genes)) max_genes = max(lengths)
+	gmt = gmt[lengths >= min_genes & lengths <= max_genes]
+	unique_genes = unique(unlist(gmt))
+
+	table = do.call(cbind, lapply(names(gmt), function(pw) {
+		vec = rep(".", length(unique_genes))
+		names(vec) = unique_genes
+		vec[gmt[[pw]]] = "+"
+		df = data.frame(vec, stringsAsFactors = FALSE)
+		colnames(df) = pw
+		df
+	}))
+	table
+}
+
 
 #' Example vector of yeast transcription factors for m:Explorer
 #'
