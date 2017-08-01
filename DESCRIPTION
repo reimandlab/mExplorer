@@ -1,5 +1,5 @@
 Package: mExplorer
-Version: 0.0.3
+Version: 0.0.4
 License: GPL (>= 2)
 Description: A method for selecting process-specific regulators from
     high-throughput data using multinomial regression models.

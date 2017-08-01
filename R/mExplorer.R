@@ -165,11 +165,12 @@ prepare_dframe = function(dframe) {
 #' @param gmt_filename Path to GMT file to convert.
 #' @param min_genes Numeric indicating to discard pathways with less than min_genes genes. If NA, there is no lower bound on the number of genes. Default is NA.
 #' @param max_genes Numeric indicating to discard pathways with more than max_genes genes. If NA, there is no upper bound on the number of genes. Default is NA.
-
+#'
 #' @return Data frame with pathways as columns, genes as rows. Gene/pathway combinations are marked with "+" if that gene is in the pathway, or "." if not.
 #' @examples
-#' # Create m:Explorer input data frame from GMT at "path/to/gmt," discarding pathways with less than 5 genes and more than 1000 genes
-#' \dontrun{gmt2dframe("path/to/gmt", 5, 1000)}
+#' # Create m:Explorer input data frame from GMT at "path/to/gmt," discarding
+#' # pathways with less than 5 genes and more than 1000 genes
+#' \dontrun{gmt2dframe("path/to/file.gmt", 5, 1000)}
 #' @export
 gmt2dframe = function(gmt_filename, min_genes = NA, max_genes = NA) {
 	gmt = qusage::read.gmt(gmt_filename)

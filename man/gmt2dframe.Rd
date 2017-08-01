@@ -20,6 +20,7 @@ Data frame with pathways as columns, genes as rows. Gene/pathway combinations ar
 Creation of m:Explorer input data frame from GMT files
 }
 \examples{
-# Create m:Explorer input data frame from GMT at "path/to/gmt," discarding pathways with less than 5 genes and more than 1000 genes
-\dontrun{gmt2dframe("path/to/gmt", 5, 1000)}
+# Create m:Explorer input data frame from GMT at "path/to/gmt," discarding
+# pathways with less than 5 genes and more than 1000 genes
+\dontrun{gmt2dframe("path/to/file.gmt", 5, 1000)}
 }
