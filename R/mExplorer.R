@@ -174,10 +174,17 @@ prepare_dframe = function(dframe) {
 #' @export
 gmt2dframe = function(gmt_filename, min_genes = NA, max_genes = NA) {
 	gmt = qusage::read.gmt(gmt_filename)
+	if (length(gmt) == 0) {
+		stop("Error: GMT file contains no pathways")
+	}
 	lengths = sapply(gmt, length)
 	if (is.na(min_genes)) min_genes = min(lengths)
 	if (is.na(max_genes)) max_genes = max(lengths)
 	gmt = gmt[lengths >= min_genes & lengths <= max_genes]
+	if (length(gmt) == 0) {
+		stop("Error: No pathways with the specified numbers of genes")
+	}
+
 	unique_genes = unique(unlist(gmt))
 
 	table = do.call(cbind, lapply(names(gmt), function(pw) {
