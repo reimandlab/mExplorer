@@ -186,6 +186,7 @@ gmt2dframe = function(gmt_filename, min_genes = NA, max_genes = NA) {
 	}
 
 	unique_genes = unique(unlist(gmt))
+	names(gmt) = gsub(":", ".", names(gmt))
 
 	table = do.call(cbind, lapply(names(gmt), function(pw) {
 		vec = rep(".", length(unique_genes))
