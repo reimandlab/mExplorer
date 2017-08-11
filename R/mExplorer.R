@@ -191,7 +191,7 @@ gmt2dframe = function(gmt_filename, min_genes = NA, max_genes = NA) {
 		vec = rep(".", length(unique_genes))
 		names(vec) = unique_genes
 		vec[gmt[[pw]]] = "+"
-		df = data.frame(vec, stringsAsFactors = FALSE)
+		df = data.frame(I(factor(vec)))
 		colnames(df) = pw
 		df
 	}))
