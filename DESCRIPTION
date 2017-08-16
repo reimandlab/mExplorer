@@ -1,12 +1,12 @@
 Package: mExplorer
-Version: 0.0.3
+Version: 0.0.4
 License: GPL (>= 2)
 Description: A method for selecting process-specific regulators from
     high-throughput data using multinomial regression models.
 Title: m:Explorer
 Authors@R: person("Juri", "Reimand", email = "juri.reimand@utoronto.ca", role = c("aut", "cre"))
 Depends: R (>= 3.0)
-Imports: stats, utils, nnet, parallel
+Imports: stats, utils, nnet, parallel, qusage
 Collate: 'mExplorer.R'
 NeedsCompilation: no
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000
