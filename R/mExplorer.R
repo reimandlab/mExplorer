@@ -166,13 +166,13 @@ prepare_dframe = function(dframe) {
 #' @param min_genes Numeric indicating to discard pathways with less than min_genes genes. If NA, there is no lower bound on the number of genes. Default is NA.
 #' @param max_genes Numeric indicating to discard pathways with more than max_genes genes. If NA, there is no upper bound on the number of genes. Default is NA.
 #'
-#' @return Data frame with pathways as columns, genes as rows. Gene/pathway combinations are marked with "+" if that gene is in the pathway, or "." if not.
+#' @return Data frame with pathways as columns, genes as rows. Gene/pathway combinations are marked with "pw" if that gene is in the pathway, or "." if not.
 #' @examples
 #' # Create m:Explorer input data frame from GMT at "path/to/gmt," discarding
 #' # pathways with less than 5 genes and more than 1000 genes
-#' \dontrun{gmt2dframe("path/to/file.gmt", 5, 1000)}
+#' \dontrun{prepare_gmt_input("path/to/file.gmt", 5, 1000)}
 #' @export
-gmt2dframe = function(gmt_filename, min_genes = NA, max_genes = NA) {
+prepare_gmt_input = function(gmt_filename, min_genes = NA, max_genes = NA) {
 	gmt = qusage::read.gmt(gmt_filename)
 	if (length(gmt) == 0) {
 		stop("Error: GMT file contains no pathways")
@@ -191,7 +191,7 @@ gmt2dframe = function(gmt_filename, min_genes = NA, max_genes = NA) {
 	table = do.call(cbind, lapply(names(gmt), function(pw) {
 		vec = rep(".", length(unique_genes))
 		names(vec) = unique_genes
-		vec[gmt[[pw]]] = "+"
+		vec[gmt[[pw]]] = "pw"
 		df = data.frame(I(factor(vec)))
 		colnames(df) = pw
 		df
