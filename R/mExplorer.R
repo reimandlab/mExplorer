@@ -11,9 +11,11 @@
 #' @references m:Explorer - multinomial regression models reveal positive and negative regulators of longevity in yeast quiescence (2012, Genome Biology) by Juri Reimand, Anu Aun, Jaak Vilo, Juan M. Vaquerizas, Juhan Sedman, and Nicholas M. Luscombe
 #' @author Juri Reimand <juri.reimand@utoronto.ca>
 #' @examples
+#' \donttest{
 #' data(yeastCCgenes)
 #' data(yeastTFdata)
 #' mExplorer(yeastTFdata, yeastCCgenes)
+#' }
 #' @export
 
 mExplorer = function(
