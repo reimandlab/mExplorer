@@ -17,7 +17,7 @@
 #' mExplorer(yeastTFdata, yeastCCgenes)
 #' }
 #' data(mExplorer_small_test_data)
-#' small_test_results = mExplorer(small_yeastTFdata, small_yeastCCgenes)
+#' small_test_results = mExplorer(small_test_dframe, small_test_response_vec)
 #' @export
 
 mExplorer = function(
