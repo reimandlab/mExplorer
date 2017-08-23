@@ -16,6 +16,8 @@
 #' data(yeastTFdata)
 #' mExplorer(yeastTFdata, yeastCCgenes)
 #' }
+#' data(mExplorer_small_test_data)
+#' small_test_results = mExplorer(small_yeastTFdata, small_yeastCCgenes)
 #' @export
 
 mExplorer = function(
@@ -170,9 +172,10 @@ prepare_dframe = function(dframe) {
 #'
 #' @return Data frame with pathways as columns, genes as rows. Gene/pathway combinations are marked with "pw" if that gene is in the pathway, or "." if not.
 #' @examples
-#' # Create m:Explorer input data frame from GMT at "path/to/gmt," discarding
+#' # Create m:Explorer input data frame from GMT "small_gmt.gmt," discarding
 #' # pathways with less than 5 genes and more than 1000 genes
-#' \dontrun{prepare_gmt_input("path/to/file.gmt", 5, 1000)}
+#' gmt_file = system.file("extdata", "small_gmt.gmt", package = "mExplorer")
+#' gmt = prepare_gmt_input(gmt_file, 5, 1000)
 #' @export
 prepare_gmt_input = function(gmt_filename, min_genes = NA, max_genes = NA) {
 	gmt = qusage::read.gmt(gmt_filename)
@@ -218,4 +221,22 @@ NULL
 #' @name yeastTFdata
 #' @usage data(yeastTFdata)
 #' @format A data frame with 6253 observations of 18 variables
+NULL
+
+#' Small vector of yeast transcription factors for testing m:Explorer
+#'
+#' @docType data
+#' @keywords datasets
+#' @name small_test_response_vec
+#' @usage data(mExplorer_small_test_data)
+#' @format A named character vector with 4 elements
+NULL
+
+#' Small sample of predictor data for testing m:Explorer
+#'
+#' @docType data
+#' @keywords datasets
+#' @name small_test_dframe
+#' @usage data(mExplorer_small_test_data)
+#' @format A data frame with 10 observations of 18 variables
 NULL

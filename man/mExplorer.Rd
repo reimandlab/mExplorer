@@ -32,6 +32,8 @@ data(yeastCCgenes)
 data(yeastTFdata)
 mExplorer(yeastTFdata, yeastCCgenes)
 }
+data(mExplorer_small_test_data)
+small_test_results = mExplorer(small_yeastTFdata, small_yeastCCgenes)
 }
 \references{
 m:Explorer - multinomial regression models reveal positive and negative regulators of longevity in yeast quiescence (2012, Genome Biology) by Juri Reimand, Anu Aun, Jaak Vilo, Juan M. Vaquerizas, Juhan Sedman, and Nicholas M. Luscombe
